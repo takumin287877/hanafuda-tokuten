@@ -362,7 +362,7 @@ const specialRibbons: Card[] = [
         month: 10,
         type: CardType.RIBBON,
         name: "紅葉の青短",
-        icon: "./assets/札/タ札/Hanafuda_October_Tanzaku_Alt.svg",
+        icon: "./assets/札/タン札/Hanafuda_October_Tanzaku_Alt.svg",
     },
 ];
 
