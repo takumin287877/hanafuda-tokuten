@@ -273,31 +273,31 @@ const availableLights: Card[] = [
         month: 1,
         type: CardType.LIGHT,
         name: "松に鶴",
-        icon: "./assets/札/光札/Hanafuda_January_Hikari_Alt.svg",
+        icon: "/札/光札/Hanafuda_January_Hikari_Alt.svg",
     },
     {
         month: 3,
         type: CardType.LIGHT,
         name: "桜に幔幕（花）",
-        icon: "./assets/札/光札/Hanafuda_March_Hikari_Alt.svg",
+        icon: "/札/光札/Hanafuda_March_Hikari_Alt.svg",
     },
     {
         month: 8,
         type: CardType.LIGHT,
         name: "芒に望月　（月）",
-        icon: "./assets/札/光札/Hanafuda_August_Hikari_Alt.svg",
+        icon: "/札/光札/Hanafuda_August_Hikari_Alt.svg",
     },
     {
         month: 12,
         type: CardType.LIGHT,
         name: "桐に鳳凰",
-        icon: "./assets/札/光札/Hanafuda_December_Hikari_Alt.svg",
+        icon: "/札/光札/Hanafuda_December_Hikari_Alt.svg",
     },
     {
         month: 11,
         type: CardType.LIGHT,
         name: "柳に小野道風 （雨）",
-        icon: "./assets/札/光札/Hanafuda_November_Hikari_Alt.svg",
+        icon: "/札/光札/Hanafuda_November_Hikari_Alt.svg",
     },
 ];
 const specialSeeds: Card[] = [
@@ -305,25 +305,25 @@ const specialSeeds: Card[] = [
         month: 9,
         type: CardType.SEED,
         name: "菊に盃 (一杯)",
-        icon: "./assets/札/タネ札/Hanafuda_September_Tane_Alt.svg",
+        icon: "/札/タネ札/Hanafuda_September_Tane_Alt.svg",
     },
     {
         month: 7,
         type: CardType.SEED,
         name: "萩に猪",
-        icon: "./assets/札/タネ札/Hanafuda_July_Tane_Alt.svg",
+        icon: "/札/タネ札/Hanafuda_July_Tane_Alt.svg",
     },
     {
         month: 10,
         type: CardType.SEED,
         name: "紅葉に鹿",
-        icon: "./assets/札/タネ札/Hanafuda_October_Tane_Alt.svg",
+        icon: "/札/タネ札/Hanafuda_October_Tane_Alt.svg",
     },
     {
         month: 6,
         type: CardType.SEED,
         name: "牡丹に蝶",
-        icon: "./assets/札/タネ札/Hanafuda_June_Tane_Alt.svg",
+        icon: "/札/タネ札/Hanafuda_June_Tane_Alt.svg",
     },
 ];
 
@@ -332,37 +332,37 @@ const specialRibbons: Card[] = [
         month: 1,
         type: CardType.RIBBON,
         name: "松の赤短",
-        icon: "./assets/札/タン札/Hanafuda_January_Tanzaku_Alt.svg",
+        icon: "/札/タン札/Hanafuda_January_Tanzaku_Alt.svg",
     },
     {
         month: 2,
         type: CardType.RIBBON,
         name: "梅の赤短",
-        icon: "./assets/札/タン札/Hanafuda_February_Tanzaku_Alt.svg",
+        icon: "/札/タン札/Hanafuda_February_Tanzaku_Alt.svg",
     },
     {
         month: 3,
         type: CardType.RIBBON,
         name: "桜の赤短",
-        icon: "./assets/札/タン札/Hanafuda_March_Tanzaku_Alt.svg",
+        icon: "/札/タン札/Hanafuda_March_Tanzaku_Alt.svg",
     },
     {
         month: 6,
         type: CardType.RIBBON,
         name: "牡丹の青短",
-        icon: "./assets/札/タン札/Hanafuda_June_Tanzaku_Alt.svg",
+        icon: "/札/タン札/Hanafuda_June_Tanzaku_Alt.svg",
     },
     {
         month: 9,
         type: CardType.RIBBON,
         name: "菊の青短",
-        icon: "./assets/札/タン札/Hanafuda_September_Tanzaku_Alt.svg",
+        icon: "/札/タン札/Hanafuda_September_Tanzaku_Alt.svg",
     },
     {
         month: 10,
         type: CardType.RIBBON,
         name: "紅葉の青短",
-        icon: "./assets/札/タン札/Hanafuda_October_Tanzaku_Alt.svg",
+        icon: "/札/タン札/Hanafuda_October_Tanzaku_Alt.svg",
     },
 ];
 
@@ -501,13 +501,16 @@ const calculatedScore = computed(() => {
         yaku["カス"] = { base: 1, additional: additionalChaff };
     }
 
-    totalScore = Object.values(yaku).reduce((sum: number, score: number | Score) => {
-        if (typeof score === 'number') {
-            return sum + score;
-        } else {
-            return sum + score.base + score.additional;
-        }
-    }, 0);
+    totalScore = Object.values(yaku).reduce(
+        (sum: number, score: number | Score) => {
+            if (typeof score === "number") {
+                return sum + score;
+            } else {
+                return sum + score.base + score.additional;
+            }
+        },
+        0
+    );
 
     if (doubleOver7.value && totalScore >= 7) {
         totalScore *= 2;
@@ -530,11 +533,12 @@ onMounted(async () => {
     ]) {
         if (card.icon) {
             try {
-                /* @vite-ignore */
-                const iconModule = await import(`../${card.icon}`);
-                svgIcons.value[card.icon] = iconModule.default;
+                svgIcons.value[card.icon] = card.icon;
             } catch (error) {
-                console.error(`Failed to load SVG for ${card.icon}:`, error);
+                console.error(
+                    `${card.icon}のSVGの読み込みに失敗しました:`,
+                    error
+                );
             }
         }
     }
