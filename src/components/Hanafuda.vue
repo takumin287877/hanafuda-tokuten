@@ -77,7 +77,11 @@
                                     </option>
                                 </select>
                             </label>
-                            <p>合計: {{ totalSeedsCount }}枚</p>
+                        </div>
+                        <div class="total-count-div">
+                            <p class="total-count">
+                                合計: {{ totalSeedsCount }}枚
+                            </p>
                         </div>
                     </div>
 
@@ -118,8 +122,12 @@
                                         {{ n - 1 }}
                                     </option>
                                 </select>
-                                <p>合計: {{ totalRibbonsCount }}枚</p>
                             </label>
+                        </div>
+                        <div class="total-count-div">
+                            <p class="total-count">
+                                合計: {{ totalRibbonsCount }}枚
+                            </p>
                         </div>
                     </div>
 
@@ -179,7 +187,9 @@
             <div class="right-column">
                 <div class="score-result">
                     <h2>得点計算結果</h2>
-                    <p>総得点: {{ calculatedScore.totalScore }}</p>
+                    <p class="total-score">
+                        総得点: 　{{ calculatedScore.totalScore }} 点
+                    </p>
                     <hr />
                     <h3>役:</h3>
                     <ul>
@@ -200,10 +210,16 @@
                         </li>
                     </ul>
                     <hr />
-                    <p v-if="doubleOver7 && calculatedScore.totalScore >= 7">
-                        ※7点以上のため2倍適用
-                    </p>
-                    <p v-if="opponentKoikoi">※相手こいこいのため2倍適用</p>
+                    <ul>
+                        <li
+                            v-if="
+                                doubleOver7 && calculatedScore.totalScore >= 7
+                            "
+                        >
+                            ※7点以上のため2倍適用
+                        </li>
+                        <li v-if="opponentKoikoi">※相手こいこいのため2倍適用</li>
+                    </ul>
                 </div>
                 <button @click="resetCards" class="reset-button">
                     札をリセット
@@ -217,6 +233,7 @@
                 </button>
             </div>
         </div>
+    </div>
 
         <!-- モーダルウィンドウ -->
         <div v-if="showModal" class="modal">
@@ -230,7 +247,6 @@
                 </button>
             </div>
         </div>
-    </div>
 </template>
 
 <script setup lang="ts">
@@ -284,7 +300,7 @@ const availableLights: Card[] = [
     {
         month: 8,
         type: CardType.LIGHT,
-        name: "芒に望月　（月）",
+        name: "芒に望月（月）",
         icon: "./札/光札/Hanafuda_August_Hikari_Alt.svg",
     },
     {
@@ -296,7 +312,7 @@ const availableLights: Card[] = [
     {
         month: 11,
         type: CardType.LIGHT,
-        name: "柳に小野道風 （雨）",
+        name: "柳に小野道風（雨）",
         icon: "./札/光札/Hanafuda_November_Hikari_Alt.svg",
     },
 ];
@@ -304,7 +320,7 @@ const specialSeeds: Card[] = [
     {
         month: 9,
         type: CardType.SEED,
-        name: "菊に盃 (一杯)",
+        name: "菊に盃（一杯）",
         icon: "./札/タネ札/Hanafuda_September_Tane_Alt.svg",
     },
     {
@@ -710,6 +726,25 @@ input[type="number"] {
     border: none;
 }
 
+.total-count-div {
+    margin-top: auto;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-score {
+    font-size: 24px;
+    font-weight: bold;
+    /* color: #4caf50; */
+    text-align: center;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
 @media (max-width: 768px) {
     .koikoi-toggle button {
         padding: 8px 16px;
@@ -823,6 +858,10 @@ select:focus {
 
 select:hover {
     background-color: #f0f0f0;
+}
+.total-count {
+    margin-top: 10px;
+    font-weight: bold;
 }
 
 @media (max-width: 1024px) {
