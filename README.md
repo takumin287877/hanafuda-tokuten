@@ -3,8 +3,6 @@
 
 https://takumin287877.github.io/hanafuda-tokuten/
 
-```https://takumin287877.github.io/hanafuda-tokuten/```
-
 技術スタック
 Vue.ts
 OG
