@@ -1,7 +1,7 @@
 # 花札　こいこいの得点計算アプリ
 最終更新：2024年9月12日
 
-[](https://takumin287877.github.io/hanafuda-tokuten/)
+https://takumin287877.github.io/hanafuda-tokuten/
 
 ```https://takumin287877.github.io/hanafuda-tokuten/```
 
